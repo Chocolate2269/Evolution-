@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evolution Theory — Demo Platform</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial;background:#f5f7ff;color:#222}
+header{background:#0B1D3A;color:#fff;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}
+header a{color:#fff;text-decoration:none;margin:0 10px;font-size:14px;font-weight:bold}
+.hero{text-align:center;padding:50px 20px;background:linear-gradient(180deg,#0B1D3A,#2a4bba);color:#fff}
+.hero h1{font-size:40px}
+.page{max-width:1000px;margin:20px auto;padding:15px;display:none}
+.page.active{display:block}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}
+.card{background:#fff;padding:20px;border-radius:14px;box-shadow:0 6px 18px rgba(0,0,0,.08);text-align:center}
+.btn{background:#0B1D3A;color:#fff;padding:12px 20px;border:none;border-radius:8px;font-weight:bold;cursor:pointer;margin-top:10px;width:100%}
+.btn-red{background:#CE1126}
+.demo-badge{background:#ffef99;color:#8a6d00;padding:8px;text-align:center;font-weight:bold;font-size:13px}
+.dash{background:#fff;padding:20px;border-radius:14px;box-shadow:0 6px 18px rgba(0,0,0,.08)}
+table{width:100%;border-collapse:collapse;margin-top:15px}
+th,td{padding:10px;border-bottom:1px solid #eee;font-size:14px;text-align:left}
+footer{text-align:center;padding:20px;font-size:11px;color:#888}
+</style>
+</head>
+<body>
+
+<div class="demo-badge">⚠️ DEMO MODE ONLY — NO REAL MONEY — SIMULATION FOR EDUCATION</div>
+
+<header>
+<div>🧬 EVOLUTION</div>
+<nav>
+<a href="#" onclick="showPage('home')">Home</a>
+<a href="#" onclick="showPage('plans')">Plans</a>
+<a href="#" onclick="showPage('dashboard')">Dashboard</a>
+<a href="#" onclick="showPage('history')">History</a>
+</nav>
+</header>
+
+<!-- HOME -->
+<div id="home" class="page active">
+<div class="hero">
+<h1>Evolution Theory Platform</h1>
+<p style="margin:15px auto;max-width:600px;opacity:.9">From Origin to Evolution — learn how growth happens over time. This is a demo simulation.</p>
+<button class="btn" style="max-width:200px" onclick="showPage('plans')">Explore Demo Plans ↓</button>
+</div>
+<div style="max-width:1000px;margin:20px auto;padding:0 15px">
+<div class="grid">
+<div class="card"><h3>🦠 Origin</h3><p>Foundation stage — simulation</p></div>
+<div class="card"><h3>🧬 Mutation</h3><p>Adaptation stage — simulation</p></div>
+<div class="card"><h3>🌿 Adaptation</h3><p>Growth stage — simulation</p></div>
+<div class="card"><h3>🦁 Evolution</h3><p>Legacy stage — simulation</p></div>
+</div>
+</div>
+</div>
+
+<!-- PLANS -->
+<div id="plans" class="page">
+<h2 style="text-align:center;color:#0B1D3A;margin:10px 0">Demo Plans — Simulation Only</h2>
+<p style="text-align:center;color:#666;font-size:13px">Clicking does NOT take money. It goes to demo dashboard.</p>
+<div class="grid" style="margin-top:20px">
+<div class="card"><b>$200 Demo</b><br>Origin<br><small>7 Days — 10% SIMULATED</small><button class="btn" onclick="invest('Origin $200')">Select Demo</button></div>
+<div class="card"><b>$350 Demo</b><br>Mutation<br><small>14 Days — 15% SIMULATED</small><button class="btn" onclick="invest('Mutation $350')">Select Demo</button></div>
+<div class="card"><b>$500 Demo</b><br>Adaptation<br><small>30 Days — 20% SIMULATED</small><button class="btn" onclick="invest('Adaptation $500')">Select Demo</button></div>
+<div class="card"><b>$1000 Demo</b><br>Evolution<br><small>30 Days — 25% SIMULATED</small><button class="btn btn-red" onclick="invest('Evolution $1000')">Select Demo</button></div>
+</div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard" class="page">
+<div class="dash">
+<h2>Dashboard — Demo Account</h2>
+<p style="color:#666;font-size:14px;margin:5px 0">User: Demo User (No real account)</p>
+<div class="grid" style="margin-top:15px">
+<div class="card"><small>Simulated Balance</small><h2 id="bal">$0.00</h2></div>
+<div class="card"><small>Active Plan</small><h2 id="activePlan">None</h2></div>
+<div class="card"><small>Total Growth (Sim)</small><h2>$0.00</h2></div>
+</div>
+<button class="btn" style="max-width:250px;margin-top:20px" onclick="alert('DEMO: In real platform, this would request withdrawal. No money involved.')">Request Withdrawal (Demo)</button>
+</div>
+</div>
+
+<!-- HISTORY -->
+<div id="history" class="page">
+<div class="dash">
+<h2>Transaction History — Demo</h2>
+<table>
+<tr><th>Date</th><th>Action</th><th>Amount</th></tr>
+<tr><td>2026-05-12</td><td>Demo Deposit</td><td>$0.00</td></tr>
+<tr><td colspan="3" style="text-align:center;color:#888">No real transactions — demo only</td></tr>
+</table>
+</div>
+</div>
+
+<footer>DEMO TEMPLATE ONLY — No SEC offering — No real funds — Educational Evolution Theory concept — USA Safe</footer>
+
+<script>
+function showPage(id){
+document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+window.scrollTo({top:0,behavior:'smooth'});
+}
+function invest(plan){
+document.getElementById('activePlan').innerText=plan+' (Demo)';
+document.getElementById('bal').innerText=plan+' Activated — SIM';
+showPage('dashboard');
+}
+</script>
+
+<!-- TAWK.TO 6ab7016d363ab13443c18e77 -->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/6ab7016d363ab13443c18e77/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+Tawk_API.onLoad = function(){ Tawk_API.showWidget(); Tawk_API.maximize(); };
+</script>
+
+</body>
+</html>
