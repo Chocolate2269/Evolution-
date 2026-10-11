@@ -3,124 +3,195 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Evolution Theory — Demo Platform</title>
+<title>Evolution | The Story of Life</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Arial;background:#f5f7ff;color:#222}
-header{background:#0B1D3A;color:#fff;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}
-header a{color:#fff;text-decoration:none;margin:0 10px;font-size:14px;font-weight:bold}
-.hero{text-align:center;padding:50px 20px;background:linear-gradient(180deg,#0B1D3A,#2a4bba);color:#fff}
-.hero h1{font-size:40px}
-.page{max-width:1000px;margin:20px auto;padding:15px;display:none}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:#f7f8fc;color:#1a233a}
+header{background:rgba(255,255,255,.8);backdrop-filter:blur(12px);border-bottom:1px solid #e9ecf5;padding:14px 28px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:20}
+.logo{font-weight:800;font-size:18px;color:#0B1D3A;letter-spacing:-0.5px}
+.logo span{color:#4f6af0}
+nav a{color:#1a233a;text-decoration:none;margin-left:22px;font-size:13px;font-weight:600;opacity:.7}
+nav a.active,nav a:hover{opacity:1;color:#4f6af0}
+.hero{max-width:1120px;margin:20px auto;padding:80px 24px 40px;display:grid;grid-template-columns:1.1fr.9fr;gap:30px;align-items:center}
+@media(max-width:900px){.hero{grid-template-columns:1fr;padding:40px 20px}}
+.hero h1{font-size:54px;line-height:0.95;letter-spacing:-1.5px;color:#0B1D3A}
+@media(max-width:900px){.hero h1{font-size:40px}}
+.hero h1 i{font-style:normal;color:#4f6af0}
+.hero p{margin:18px 0 28px;font-size:16px;line-height:1.7;color:#5a668a;max-width:480px}
+.btn{display:inline-block;padding:14px 26px;border-radius:100px;font-weight:700;font-size:13px;text-decoration:none;cursor:pointer;border:none}
+.btn-dark{background:#0B1D3A;color:#fff;box-shadow:0 10px 25px rgba(11,29,58,.2)}
+.btn-light{background:#fff;color:#0B1D3A;border:1px solid #e9ecf5;margin-left:10px}
+.stats{display:flex;gap:24px;margin-top:28px}
+.stat b{font-size:22px;display:block;color:#0B1D3A}
+.stat span{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#8a94b5;font-weight:600}
+.card-visual{background:#0B1D3A;border-radius:24px;padding:18px;position:relative;overflow:hidden;min-height:380px;display:flex;flex-direction:column;justify-content:flex-end;color:#fff}
+.card-visual:before{content:"";position:absolute;inset:0;background:radial-gradient(400px at 70% 20%,#4f6af0 0%,transparent 60%),linear-gradient(180deg,transparent,#0B1D3A)}
+.visual-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;position:relative;z-index:2}
+.v-item{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(10px);padding:16px;border-radius:14px}
+.v-item b{font-size:13px}
+.v-item p{font-size:11px;opacity:.7;margin-top:4px;line-height:1.5}
+
+.section{max-width:1120px;margin:0 auto;padding:40px 24px}
+.about{background:#fff;border:1px solid #e9ecf5;border-radius:24px;padding:40px;display:grid;grid-template-columns:1fr 1fr;gap:40px}
+@media(max-width:900px){.about{grid-template-columns:1fr}}
+.about h2{font-size:32px;letter-spacing:-1px;color:#0B1D3A;margin-bottom:14px}
+.about p{color:#5a668a;line-height:1.8;font-size:14px;margin-bottom:12px}
+.about-list{margin-top:10px}
+.about-list div{display:flex;gap:12px;margin:12px 0;font-size:13px}
+.dot{width:28px;height:28px;border-radius:100px;background:#eef2ff;color:#4f6af0;display:grid;place-items:center;font-weight:800;flex-shrink:0}
+
+.page{display:none}
 .page.active{display:block}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}
-.card{background:#fff;padding:20px;border-radius:14px;box-shadow:0 6px 18px rgba(0,0,0,.08);text-align:center}
-.btn{background:#0B1D3A;color:#fff;padding:12px 20px;border:none;border-radius:8px;font-weight:bold;cursor:pointer;margin-top:10px;width:100%}
-.btn-red{background:#CE1126}
-.demo-badge{background:#ffef99;color:#8a6d00;padding:8px;text-align:center;font-weight:bold;font-size:13px}
-.dash{background:#fff;padding:20px;border-radius:14px;box-shadow:0 6px 18px rgba(0,0,0,.08)}
-table{width:100%;border-collapse:collapse;margin-top:15px}
-th,td{padding:10px;border-bottom:1px solid #eee;font-size:14px;text-align:left}
-footer{text-align:center;padding:20px;font-size:11px;color:#888}
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:20px}
+@media(max-width:900px){.timeline{grid-template-columns:1fr 1fr}}
+.t-card{background:#fff;border:1px solid #e9ecf5;border-radius:16px;padding:18px}
+.t-card small{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#4f6af0;font-weight:800}
+.t-card b{display:block;margin:6px 0;color:#0B1D3A}
+.t-card p{font-size:12px;color:#6b789a;line-height:1.5}
+
+.dash{display:grid;grid-template-columns:1.3fr.7fr;gap:16px}
+@media(max-width:900px){.dash{grid-template-columns:1fr}}
+.box{background:#fff;border:1px solid #e9ecf5;border-radius:20px;padding:22px}
+.box h3{font-size:15px;color:#0B1D3A;margin-bottom:14px}
+.progress{height:8px;background:#eef2ff;border-radius:100px;overflow:hidden}
+.bar{height:100%;background:#4f6af0;width:45%}
+.lesson{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #f1f3f9;font-size:13px}
+#tawk-wrap{height:460px;border:1px solid #e9ecf5;border-radius:16px;overflow:hidden;background:#f7f8fc}
+
+footer{text-align:center;padding:40px;color:#9aa5c3;font-size:11px}
 </style>
 </head>
 <body>
 
-<div class="demo-badge">⚠️ DEMO MODE ONLY — NO REAL MONEY — SIMULATION FOR EDUCATION</div>
-
 <header>
-<div>🧬 EVOLUTION</div>
+<div class="logo">EVOLUTION <span>.</span></div>
 <nav>
-<a href="#" onclick="showPage('home')">Home</a>
-<a href="#" onclick="showPage('plans')">Plans</a>
-<a href="#" onclick="showPage('dashboard')">Dashboard</a>
-<a href="#" onclick="showPage('history')">History</a>
+<a href="#" class="active" onclick="switchPage('home',this)">Home</a>
+<a href="#" onclick="switchPage('timeline',this)">Timeline</a>
+<a href="#" onclick="switchPage('dashboard',this)">Dashboard</a>
 </nav>
 </header>
 
-<!-- HOME -->
+<!-- HOME + ABOUT IN ONE -->
 <div id="home" class="page active">
 <div class="hero">
-<h1>Evolution Theory Platform</h1>
-<p style="margin:15px auto;max-width:600px;opacity:.9">From Origin to Evolution — learn how growth happens over time. This is a demo simulation.</p>
-<button class="btn" style="max-width:200px" onclick="showPage('plans')">Explore Demo Plans ↓</button>
+<div>
+<h1>The story of life <i>is still writing itself.</i></h1>
+<p>Evolution is not just about dinosaurs and Darwin. It's about how everything alive adapts, survives, and transforms. From a single cell to 8 billion humans — this is the science behind us.</p>
+<div>
+<a href="#" class="btn btn-dark" onclick="switchPage('timeline',document.querySelectorAll('nav a')[1])">Explore Timeline</a>
+<a href="#" class="btn btn-light" onclick="switchPage('dashboard',document.querySelectorAll('nav a')[2])">Open Dashboard</a>
 </div>
-<div style="max-width:1000px;margin:20px auto;padding:0 15px">
-<div class="grid">
-<div class="card"><h3>🦠 Origin</h3><p>Foundation stage — simulation</p></div>
-<div class="card"><h3>🧬 Mutation</h3><p>Adaptation stage — simulation</p></div>
-<div class="card"><h3>🌿 Adaptation</h3><p>Growth stage — simulation</p></div>
-<div class="card"><h3>🦁 Evolution</h3><p>Legacy stage — simulation</p></div>
+<div class="stats">
+<div class="stat"><b>3.8B+</b><span>Years of Life</span></div>
+<div class="stat"><b>8.7M</b><span>Species</span></div>
+<div class="stat"><b>98.8%</b><span>DNA Shared</span></div>
+</div>
+</div>
+<div class="card-visual">
+<div class="visual-grid">
+<div class="v-item"><b>🦠 Origin</b><p>First life in oceans</p></div>
+<div class="v-item"><b>🧬 old-time-Illnois</b><p>Tiny DNA changes</p></div>
+<div class="v-item"><b>🌿 Selection</b><p>Nature decides</p></div>
+<div class="v-item"><b>🦁 Evolution</b><p>New species born</p></div>
+</div>
+<div style="position:relative;z-index:2;margin-top:20px;font-size:12px;opacity:.8">“Nothing in biology makes sense except in the light of evolution.” — Dobzhansky</div>
+</div>
+</div>
+
+<div class="section">
+<div class="about">
+<div>
+<h2>About This Platform</h2>
+<p>We built Evolution as a clean learning experience — no noise, no myths. Just clear science explained beautifully.</p>
+<p>Our mission is to help students, teachers, and curious minds understand how life really changes over time, with evidence from fossils, DNA, and living observation.</p>
+<div class="about-list">
+<div><div class="dot">1</div><div><b>Science First</b><br><span style="color:#6b789a">Peer-reviewed sources, updated 2026</span></div></div>
+<div><div class="dot">2</div><div><b>Visual Learning</b><br><span style="color:#6b789a">Timelines, cards, interactive dashboard</span></div></div>
+<div><div class="dot">3</div><div><b>Ask Inside</b><br><span style="color:#6b789a">Chat about evolution live inside Dashboard</span></div></div>
+</div>
+</div>
+<div style="background:#f7f8fc;border-radius:16px;padding:22px">
+<h3 style="font-size:14px;color:#0B1D3A;margin-bottom:10px">What you will learn</h3>
+<div class="lesson"><span>Origin of Life</span><span style="color:#4f6af0">●</span></div>
+<div class="lesson"><span>Natural Selection</span><span style="color:#4f6af0">●</span></div>
+<div class="lesson"><span>DNA & Genetics</span><span style="color:#4f6af0">●</span></div>
+<div class="lesson"><span>Fossil Evidence</span><span style="color:#4f6af0">●</span></div>
+<div class="lesson"><span>Human Evolution</span><span style="color:#4f6af0">●</span></div>
+<div class="lesson"><span>Modern Evolution</span><span style="color:#4f6af0">●</span></div>
+<div style="margin-top:16px;padding:14px;background:#0B1D3A;color:#fff;border-radius:12px;font-size:12px;line-height:1.6">
+<b>Did you know?</b><br>Humans still evolve. Tibetan people evolved to live at high altitude in just 3,000 years.
+</div>
+</div>
 </div>
 </div>
 </div>
 
-<!-- PLANS -->
-<div id="plans" class="page">
-<h2 style="text-align:center;color:#0B1D3A;margin:10px 0">Demo Plans — Simulation Only</h2>
-<p style="text-align:center;color:#666;font-size:13px">Clicking does NOT take money. It goes to demo dashboard.</p>
-<div class="grid" style="margin-top:20px">
-<div class="card"><b>$200 Demo</b><br>Origin<br><small>7 Days — 10% SIMULATED</small><button class="btn" onclick="invest('Origin $200')">Select Demo</button></div>
-<div class="card"><b>$350 Demo</b><br>Mutation<br><small>14 Days — 15% SIMULATED</small><button class="btn" onclick="invest('Mutation $350')">Select Demo</button></div>
-<div class="card"><b>$500 Demo</b><br>Adaptation<br><small>30 Days — 20% SIMULATED</small><button class="btn" onclick="invest('Adaptation $500')">Select Demo</button></div>
-<div class="card"><b>$1000 Demo</b><br>Evolution<br><small>30 Days — 25% SIMULATED</small><button class="btn btn-red" onclick="invest('Evolution $1000')">Select Demo</button></div>
+<!-- TIMELINE -->
+<div id="timeline" class="page">
+<div class="section">
+<h2 style="color:#0B1D3A;font-size:28px;letter-spacing:-0.5px">Timeline of Evolution</h2>
+<p style="color:#6b789a;font-size:13px;margin-top:6px">Swipe through 4.5 billion years in seconds.</p>
+<div class="timeline">
+<div class="t-card"><small>4.5B Years</small><b>Earth Forms</b><p>Hot, no oxygen</p></div>
+<div class="t-card"><small>3.8B Years</small><b>First Life</b><p>Bacteria appear</p></div>
+<div class="t-card"><small>500M Years</small><b>Cambrian</b><p>Fish explode</p></div>
+<div class="t-card"><small>375M Years</small><b>Land</b><p>Tetrapods walk</p></div>
+<div class="t-card"><small>230M Years</small><b>Dinosaurs</b><p>Dominate planet</p></div>
+<div class="t-card"><small>65M Years</small><b>Extinction</b><p>Mammals rise</p></div>
+<div class="t-card"><small>1859</small><b>Darwin</b><p>Origin of Species</p></div>
+<div class="t-card"><small>Today</small><b>You</b><p>Evolution continues</p></div>
+</div>
 </div>
 </div>
 
-<!-- DASHBOARD -->
+<!-- DASHBOARD WITH TAWK INSIDE -->
 <div id="dashboard" class="page">
-<div class="dash">
-<h2>Dashboard — Demo Account</h2>
-<p style="color:#666;font-size:14px;margin:5px 0">User: Demo User (No real account)</p>
-<div class="grid" style="margin-top:15px">
-<div class="card"><small>Simulated Balance</small><h2 id="bal">$0.00</h2></div>
-<div class="card"><small>Active Plan</small><h2 id="activePlan">None</h2></div>
-<div class="card"><small>Total Growth (Sim)</small><h2>$0.00</h2></div>
+<div class="section">
+<h2 style="color:#0B1D3A;font-size:28px">Dashboard</h2>
+<div class="dash" style="margin-top:18px">
+<div class="box">
+<h3>Progress</h3>
+<div style="display:flex;justify-content:space-between;font-size:12px;color:#6b789a;margin-bottom:8px"><span>45% complete</span><span>3/6 lessons</span></div>
+<div class="progress"><div class="bar"></div></div>
+<div style="margin-top:18px">
+<div class="lesson"><b>What is Evolution?</b><span style="color:#22c55e">Done</span></div>
+<div class="lesson"><b>Natural Selection</b><span style="color:#22c55e">Done</span></div>
+<div class="lesson"><b>DNA Proof</b><span style="color:#4f6af0">In progress</span></div>
+<div class="lesson"><b>Fossils</b><span>Locked</span></div>
 </div>
-<button class="btn" style="max-width:250px;margin-top:20px" onclick="alert('DEMO: In real platform, this would request withdrawal. No money involved.')">Request Withdrawal (Demo)</button>
+<button class="btn btn-dark" style="margin-top:18px;width:100%;border-radius:12px" onclick="alert('Lesson 3 opened — continue learning!')">Continue →</button>
+</div>
+<div class="box">
+<h3>Ask About Evolution</h3>
+<p style="font-size:11px;color:#8a94b5;margin-bottom:12px">Live chat loads only here — inside dashboard.</p>
+<div id="tawk-wrap"></div>
+</div>
+</div>
 </div>
 </div>
 
-<!-- HISTORY -->
-<div id="history" class="page">
-<div class="dash">
-<h2>Transaction History — Demo</h2>
-<table>
-<tr><th>Date</th><th>Action</th><th>Amount</th></tr>
-<tr><td>2026-05-12</td><td>Demo Deposit</td><td>$0.00</td></tr>
-<tr><td colspan="3" style="text-align:center;color:#888">No real transactions — demo only</td></tr>
-</table>
-</div>
-</div>
-
-<footer>DEMO TEMPLATE ONLY — No SEC offering — No real funds — Educational Evolution Theory concept — USA Safe</footer>
+<footer>© 2026 Evolution Theory — Educational Platform — No funds, no investment — Built for learning</footer>
 
 <script>
-function showPage(id){
+function switchPage(id,el){
 document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
 document.getElementById(id).classList.add('active');
+document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));
+if(el) el.classList.add('active');
+if(id==='dashboard') loadTawk();
 window.scrollTo({top:0,behavior:'smooth'});
 }
-function invest(plan){
-document.getElementById('activePlan').innerText=plan+' (Demo)';
-document.getElementById('bal').innerText=plan+' Activated — SIM';
-showPage('dashboard');
+let tawkLoaded=false;
+function loadTawk(){
+if(tawkLoaded) return; tawkLoaded=true;
+var s=document.createElement('script');
+s.async=true;
+s.src='https://embed.tawk.to/6ab7016d363ab13443c18e77/default';
+s.charset='UTF-8'; s.setAttribute('crossorigin','*');
+document.getElementById('tawk-wrap').appendChild(s);
 }
 </script>
-
-<!-- TAWK.TO 6ab7016d363ab13443c18e77 -->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/6ab7016d363ab13443c18e77/default';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-Tawk_API.onLoad = function(){ Tawk_API.showWidget(); Tawk_API.maximize(); };
-</script>
-
 </body>
-</html>
+                                                  </html>
